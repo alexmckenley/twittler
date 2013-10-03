@@ -18,6 +18,7 @@ var addTweet = function(newTweet){
   var username = newTweet.user;
   streams.users[username].push(newTweet);
   streams.home.push(newTweet);
+  displayTweet(newTweet);
 };
 
 // utility function
@@ -44,6 +45,12 @@ var generateRandomTweet = function(){
   tweet.message = randomMessage();
   tweet.created_at = new Date();
   addTweet(tweet);
+};
+
+var displayTweet = function(tweet){
+  var $tweet = $('<div></div>');
+  $tweet.text('@' + tweet.user + ': ' + tweet.message + ' ' + tweet.created_at);
+  $('body').prepend($tweet);
 };
 
 for(var i = 0; i < 10; i++){
