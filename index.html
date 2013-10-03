@@ -11,12 +11,20 @@
         var $body = $('body');
         $body.html('');
 
+        var displayTweet = function(tweet){
+          var $tweet = $('<div></div>');
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + ' -- ' + tweet.created_at);
+          $body.prepend($tweet);
+        };
+
         var index = streams.home.length - 1;
         console.log(index);
         while(index >= 0){
           displayTweet(streams.home[index]);
           index -= 1;
         }
+
+
 
       });
 
