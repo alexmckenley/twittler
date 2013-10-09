@@ -57,7 +57,7 @@
         <input type="text" id="tweetText" value="Whats on your mind?"></input>
         <button id="tweetButton">New Tweet</button>
       </div>
-      <button onClick=updateHome()>Refresh Tweets</button>
+      <button id="refreshButton">Refresh Tweets</button>
     
       <div id="messages">
       </div>
@@ -75,17 +75,19 @@
     var displayTweet = function(tweet){
       var $messages = $('#messages');
       var $tweet = $('<div></div>');
-      $tweet.text('@' + tweet.user + ': ' + tweet.message + ' -- ' + tweet.created_at);
-      $messages.append($tweet);
+      var userLink = '<a href="#">@' + tweet.user + "</a>";
+      $tweet.html(userLink + ': ' + tweet.message + ' -- ' + tweet.created_at);
+      $messages.prepend($tweet);
     };
 
     var updateHome = function (){
-      var index = streams.home.length - 1;
+      $("#viewName").text("News Feed");
+      var index = streams.home.length - 10;
       var $messages = $('#messages');
       $messages.text('');
-      while(index >= streams.home.length - 10){
+      while(index <= streams.home.length - 1){
         displayTweet(streams.home[index]);
-        index -= 1;
+        index += 1;
       }
     };
 
@@ -93,6 +95,15 @@
       writeTweet($("#tweetText").val());
       $("#tweetText").val("");
       updateHome();
+    };
+
+    var userTweets = function(username){
+      $("#viewName").text(username + "'s Tweets");
+      var $messages = $('#messages');
+      $messages.text("");
+      streams.users[username].forEach(function(element, index, array){
+        displayTweet(element);
+      });
     };
 
 
@@ -114,6 +125,14 @@
       });
 
       $('#tweetButton').on('click', newTweet);
+
+      $('#refreshButton').on('click', updateHome);
+
+      $("#messages").on('click', 'a', function(e){
+        e.preventDefault();
+        var username = $(e.target).text().substring(1);
+        userTweets(username);
+      });
 
     });
 
