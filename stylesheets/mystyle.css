@@ -23,3 +23,7 @@
 .messageText{
     font-size: 1.5em;
 }
+.createdAt{
+    font-style: italic;
+    color: rgba(168, 168, 168, 1);
+}
