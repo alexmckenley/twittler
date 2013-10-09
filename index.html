@@ -74,7 +74,7 @@
     var displayTweet = function(tweet){
       var $messages = $('#messages');
       var $tweet = $('<div class="tweet row"></div>');
-      var $userLink = $('<a class="usernameText" href="#">@' + tweet.user + " </a>");
+      var $userLink = $('<a class="usernameText" href="#">@' + tweet.user + "</a>");
       var $messageText = $('<span class="messageText">'+ tweet.message + "</span>");
       var $created_at = $('<span class="createdAt">' + tweet.created_at + '</span>');
       $tweet.append($userLink, '</br>', $messageText, "</br>", $created_at);
@@ -101,7 +101,7 @@
     var userTweets = function(username){
       $("#viewName").text(username + "'s Tweets");
       var $messages = $('#messages');
-      $messages.text("");
+      $messages.text('');
       streams.users[username].forEach(function(element, index, array){
         displayTweet(element);
       });
