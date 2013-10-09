@@ -61,7 +61,6 @@
     
       <div id="messages">
       </div>
-    </div>
 
 
 
@@ -74,9 +73,11 @@
 
     var displayTweet = function(tweet){
       var $messages = $('#messages');
-      var $tweet = $('<div></div>');
-      var userLink = '<a href="#">@' + tweet.user + "</a>";
-      $tweet.html(userLink + ': ' + tweet.message + ' -- ' + tweet.created_at);
+      var $tweet = $('<div class="tweet row"></div>');
+      var $userLink = $('<a class="usernameText" href="#">@' + tweet.user + " </a>");
+      var $messageText = $('<span class="messageText">'+ tweet.message + "</span>");
+      var $created_at = $('<span class="createdAt">' + tweet.created_at + '</span>');
+      $tweet.append($userLink, '</br>', $messageText, "</br>", $created_at);
       $messages.prepend($tweet);
     };
 
