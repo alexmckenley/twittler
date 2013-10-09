@@ -19,6 +19,8 @@
 }
 .usernameText{
     font-weight: normal;
+    text-decoration:none; 
+    color: rgba(196, 48, 48, 1);
 }
 .messageText{
     font-size: 1.5em;
