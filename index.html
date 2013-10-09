@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="stylesheets/base.css">
 	<link rel="stylesheet" href="stylesheets/skeleton.css">
 	<link rel="stylesheet" href="stylesheets/layout.css">
+  <link rel="stylesheet" href="stylesheets/mystyle.css">
 
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -47,12 +48,15 @@
 	<div class="container">
 		<div class="sixteen columns">
 			<h1>Twittler</h1>
-			<h5>Alex Taylor</h5>
+			<h5>Twitter Clone</h5>
 			<hr />
 
-      <input type="text" id="tweetText" value="Whats on your mind?"></input>
-      <button>New Tweet</button>
-      </br>
+      <h2 id="viewName">News Feed</h2>
+
+      <div class="newTweet clearfix">
+        <input type="text" id="tweetText" value="Whats on your mind?"></input>
+        <button id="tweetButton">New Tweet</button>
+      </div>
       <button onClick=updateHome()>Refresh Tweets</button>
     
       <div id="messages">
@@ -66,6 +70,8 @@
 
   <!-- JavaScript -->
   <script>
+
+
     var displayTweet = function(tweet){
       var $messages = $('#messages');
       var $tweet = $('<div></div>');
@@ -83,9 +89,32 @@
       }
     };
 
+    var newTweet = function(){
+      writeTweet($("#tweetText").val());
+      $("#tweetText").val("");
+      updateHome();
+    };
+
+
+
 
     $(document).ready(function(){
       updateHome();
+
+      $("#tweetText").on("focus", function(e){
+        $target = $(e.target);
+        if($target.val() === "Whats on your mind?")
+          $target.val('');
+      });
+
+      $('#tweetText').keypress(function(e) {
+        if (e.which == 13) {
+          $('#tweetButton').click();
+        }
+      });
+
+      $('#tweetButton').on('click', newTweet);
+
     });
 
   </script>

@@ -3,6 +3,10 @@
  * You can safely leave this file untouched, and confine your changes to index.html.
  */
 
+var getURLParameter = function(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
+}
+
 // set up data structures
 window.streams = {};
 streams.home = [];
@@ -11,6 +15,8 @@ streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
 streams.users.mracus = [];
 streams.users.douglascalhoun = [];
+var visitor = getURLParameter("user") || "guest";
+streams.users[visitor] = [];
 window.users = Object.keys(streams.users);
 
 // utility function for adding tweets to our data structures
@@ -66,5 +72,6 @@ var writeTweet = function(message){
   var tweet = {};
   tweet.user = visitor;
   tweet.message = message;
+  tweet.created_at = new Date();
   addTweet(tweet);
 };

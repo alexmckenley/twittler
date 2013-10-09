@@ -1,0 +1,19 @@
+.newTweet{
+    float: left;
+    width: 100%;
+    display:inline;
+}
+
+.newTweet input{
+    height: 40px;
+    box-sizing: border-box;
+    font-size: 1em;
+    float: left;
+    width: 80%; /* or larger */
+}
+.newTweet button{
+    font-size: 1em;
+    height: 40px;
+    width: 15%; /* or larger */
+    float: left;
+}
